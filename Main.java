@@ -1,31 +1,68 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Main {
-    public static ArrayList<SchoolClass> createSchoolClasses(){
-        int[] classes = new int[]{1,2,3,4,5,6,7,8,9,10,11,12};
-        List<SchoolClass> schoolClasses = new ArrayList<>(12);
-        List<String> sections = new ArrayList<>();
-        sections.add("Dragons");
-        sections.add("Enthusiasts");
-        sections.add("Triggered");
-        for (int i = 0; i < classes.length; i++) {
-            SchoolClass schoolClass = new SchoolClass(classes[i],sections);
-            schoolClasses.add(schoolClass);
+    public static void makeClasses(){
+        SchoolClass.__init__();// will init the classes list
+        String[] primarySubjects = {"Hindi", "English",
+                "Maths","EVS","Arts and Crafts","Information Technology",
+                "GK"};
+        String[] secondarySubjects = {
+                "Hindi", "English",
+                "Maths","Science",
+                "GK",
+                "Social Studies",
+                "Information Technology",
+                "Sanskrit"
+        } ;
+        String[] med = {"Botany","Zoology","Physics","Chemistry",};
+        String[] nonmed = {"Maths","Physics","Chemistry"};
+        String[] pcmb = {"Botany","Zoology","Physics","Chemistry","Maths"};
+        for (int i = 1; i < 13; i++) {
+            List<String> subjs = new ArrayList<>();
+            if(i<6){
+                for(String s:primarySubjects){
+                    subjs.add(s);
+                }
+                // make class of it
+                new SchoolClass(i,subjs);
+            } else if (i >=5 && i< 11) {
+                for(String s:secondarySubjects){
+                    subjs.add(s);
+                }
+                new SchoolClass(i,subjs);
+            } else if (i == 11) {
+                // med and non-med
+                for(String s:med){
+                    subjs.add(s);
+                }
+                new SchoolClass(i,subjs);
+                subjs = new ArrayList<>();
+
+                for(String s:nonmed){
+                    subjs.add(s);
+                }
+                new SchoolClass(i,subjs);
+            }
+            else if(i == 12){
+                // med and non-med
+                for(String s:med){
+                    subjs.add(s);
+                }
+                new SchoolClass(12,subjs);
+                subjs = new ArrayList<>();
+
+                for(String s:nonmed){
+                    subjs.add(s);
+                }
+                new SchoolClass(12,subjs);
+            }
         }
-        return (ArrayList<SchoolClass>) schoolClasses;
-    }
-    public static ArrayList<Subject> createSubjects(){
-        // create subjects
-        String[] subjects = new String[] {"Hindi","English","Maths","EVS","Arts and Crafts","Civics","Geography","History","Physical Education","Information Technology","Chemistry","Physics","Biology","Social Studies"};
-        int[] credits = new int[] {3,3,3,3,2,4,3,4,3,3,3,3,3,4};
-        List<Subject> subjectList = new ArrayList<>();
-        for (int i = 0; i < subjects.length; i++) {
-            subjectList.add(new Subject(credits[i],subjects[i]));
-        }
-        return (ArrayList<Subject>) subjectList;
+        System.out.println(SchoolClass.classes);
     }
     public static void main(String[] args) {
-// need a way to create
-// today 's work is  done in next one we will assignSubjects to classes
-        // ********** bye ********************
+        makeClasses();
     }
 }
